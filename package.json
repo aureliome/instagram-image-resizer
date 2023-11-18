@@ -5,6 +5,7 @@
   "source": "src/index.ts",
   "main": "dist/main.js",
   "module": "dist/module.js",
+  "types": "dist/types.d.ts",
   "scripts": {
     "build": "parcel build"
   },
