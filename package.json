@@ -2,7 +2,8 @@
   "name": "instagram-image-resizer",
   "version": "0.0.1",
   "description": "Resize and optimise images for Instagram post sizes.",
-  "scripts": {},
+  "source": "src/index.ts",
+  "main": "dist/main.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/aureliome/instagram-image-resizer.git"
