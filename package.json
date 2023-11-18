@@ -21,5 +21,8 @@
   "bugs": {
     "url": "https://github.com/aureliome/instagram-image-resizer/issues"
   },
-  "homepage": "https://github.com/aureliome/instagram-image-resizer#readme"
+  "homepage": "https://github.com/aureliome/instagram-image-resizer#readme",
+  "devDependencies": {
+    "parcel": "^2.10.3"
+  }
 }
