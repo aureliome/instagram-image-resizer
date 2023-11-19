@@ -1,5 +1,5 @@
 import { promises as fs } from "fs";
-import { resizeImage } from "./inc/image.js";
+import { resizeImage } from "./inc/image";
 
 export default async (sourcePath: string, destPath: string) => {
   const stat = await fs.lstat(sourcePath);

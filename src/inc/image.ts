@@ -1,9 +1,12 @@
 import sharp from "sharp";
-import { createDirectory } from "./utils.js";
-import resizeHorizontalImage from "./horizontal.js";
-import resizeVerticalImage from "./vertical.js";
+import { createDirectory } from "./utils";
+import resizeHorizontalImage from "./horizontal";
+import resizeVerticalImage from "./vertical";
 
-export const resizeImage = async (sourceFilePath: string, destinationPath: string) => {
+export const resizeImage = async (
+  sourceFilePath: string,
+  destinationPath: string
+) => {
   await createDirectory(destinationPath);
 
   const { width, height } = await sharp(sourceFilePath).metadata();

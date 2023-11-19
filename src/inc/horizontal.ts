@@ -1,9 +1,19 @@
 import sharp from "sharp";
-import { getFileNameFromPath } from "./utils.js";
-import { IG_POST_HEIGHT_HOR, IG_POST_WIDTH, SHARP_JPEG_OPTIONS, SHARP_RESIZE_OPTIONS } from "./constants.js";
-import { logSuccessfulImageCreation } from "./logger.js";
+import { getFileNameFromPath } from "./utils";
+import {
+  IG_POST_HEIGHT_HOR,
+  IG_POST_WIDTH,
+  SHARP_JPEG_OPTIONS,
+  SHARP_RESIZE_OPTIONS,
+} from "./constants";
+import { logSuccessfulImageCreation } from "./logger";
 
-export default async (sourceFilePath: string, width: number, height: number, destinationPath: string) => {
+export default async (
+  sourceFilePath: string,
+  width: number,
+  height: number,
+  destinationPath: string
+) => {
   const fileName = getFileNameFromPath(sourceFilePath);
 
   const fileName1 = `${destinationPath}/${fileName}-1.jpg`;
