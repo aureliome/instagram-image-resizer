@@ -8,7 +8,8 @@
   "types": "dist/types.d.ts",
   "bin": "./cli.js",
   "scripts": {
-    "build": "parcel build"
+    "build": "parcel build",
+    "start": "node cli.js example output"
   },
   "repository": {
     "type": "git",
