@@ -33,6 +33,7 @@
   "devDependencies": {
     "@parcel/packager-ts": "^2.10.3",
     "@parcel/transformer-typescript-types": "^2.10.3",
+    "@types/node": "^20.9.2",
     "parcel": "^2.10.3",
     "typescript": "^5.2.2"
   },
