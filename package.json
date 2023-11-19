@@ -6,6 +6,7 @@
   "main": "dist/main.js",
   "module": "dist/module.js",
   "types": "dist/types.d.ts",
+  "bin": "./cli.js",
   "scripts": {
     "build": "parcel build"
   },

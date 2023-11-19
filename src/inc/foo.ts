@@ -1,1 +1,1 @@
-export const pow = (num) => num * 2;
+export const pow = (num) => num * num;
