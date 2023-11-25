@@ -8,7 +8,6 @@ import {
   SHARP_JPEG_OPTIONS,
   SHARP_RESIZE_OPTIONS,
 } from "./constants";
-import exp from "constants";
 
 jest.mock("./utils", () => ({
   getFileNameFromPath: jest.fn(() => "file"),
