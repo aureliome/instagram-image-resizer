@@ -9,17 +9,24 @@ export const resizeImage = async (
 ) => {
   await createDirectory(destinationPath);
 
-  const { width, height } = await sharp(sourceFilePath).metadata();
+  const { width: sourceWidth, height: sourceHeight } = await sharp(
+    sourceFilePath
+  ).metadata();
 
-  if (!width || !height) {
+  if (!sourceWidth || !sourceHeight) {
     throw new Error(`
     Source Image '${sourceFilePath}' width and height have not been retrieved
     Check that it is a real image file`);
   }
 
-  if (width < height) {
-    await resizeVerticalImage(sourceFilePath, destinationPath);
+  if (sourceWidth < sourceHeight) {
+    await resizeVerticalImage({ sourceFilePath, destinationPath });
   } else {
-    await resizeHorizontalImage(sourceFilePath, width, height, destinationPath);
+    await resizeHorizontalImage({
+      sourceFilePath,
+      destinationPath,
+      sourceWidth,
+      sourceHeight,
+    });
   }
 };

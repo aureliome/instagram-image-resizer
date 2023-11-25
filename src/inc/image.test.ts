@@ -78,37 +78,37 @@ describe("image", () => {
     });
 
     it("it calls resizeVerticalImage if the image is a portrait", async () => {
-      const sourcePath = "/source/path/portrait.jpg";
+      const sourceFilePath = "/source/path/portrait.jpg";
       const destinationPath = "/destination/path";
-      await resizeImage(sourcePath, destinationPath);
-      expect(resizeVerticalImage).toHaveBeenCalledWith(
-        sourcePath,
-        destinationPath
-      );
+      await resizeImage(sourceFilePath, destinationPath);
+      expect(resizeVerticalImage).toHaveBeenCalledWith({
+        sourceFilePath,
+        destinationPath,
+      });
     });
 
     it("it calls resizeHorizontalImage if the image is a landscape", async () => {
-      const sourcePath = "/source/path/landscape.jpg";
+      const sourceFilePath = "/source/path/landscape.jpg";
       const destinationPath = "/destination/path";
-      await resizeImage(sourcePath, destinationPath);
-      expect(resizeHorizontalImage).toHaveBeenCalledWith(
-        sourcePath,
-        500,
-        300,
-        destinationPath
-      );
+      await resizeImage(sourceFilePath, destinationPath);
+      expect(resizeHorizontalImage).toHaveBeenCalledWith({
+        sourceFilePath,
+        destinationPath,
+        sourceWidth: 500,
+        sourceHeight: 300,
+      });
     });
 
     it("it calls resizeHorizontalImage if the image is a square", async () => {
-      const sourcePath = "/source/path/square.jpg";
+      const sourceFilePath = "/source/path/square.jpg";
       const destinationPath = "/destination/path";
-      await resizeImage(sourcePath, destinationPath);
-      expect(resizeHorizontalImage).toHaveBeenCalledWith(
-        sourcePath,
-        500,
-        500,
-        destinationPath
-      );
+      await resizeImage(sourceFilePath, destinationPath);
+      expect(resizeHorizontalImage).toHaveBeenCalledWith({
+        sourceFilePath,
+        destinationPath,
+        sourceWidth: 500,
+        sourceHeight: 500,
+      });
     });
   });
 });

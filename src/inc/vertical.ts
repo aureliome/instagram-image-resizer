@@ -8,7 +8,15 @@ import {
   SHARP_JPEG_OPTIONS,
 } from "./constants";
 
-export default async (sourceFilePath: string, destinationPath: string) => {
+interface ResizeVerticalImageParameters {
+  sourceFilePath: string;
+  destinationPath: string;
+}
+
+export default async ({
+  sourceFilePath,
+  destinationPath,
+}: ResizeVerticalImageParameters) => {
   const fileName = getFileNameFromPath(sourceFilePath);
 
   const fileName1 = `${destinationPath}/${fileName}-1.jpg`;

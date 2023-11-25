@@ -8,12 +8,19 @@ import {
 } from "./constants";
 import { logSuccessfulImageCreation } from "./logger";
 
-export default async (
-  sourceFilePath: string,
-  width: number,
-  height: number,
-  destinationPath: string
-) => {
+interface ResizeHorizontalImageParameters {
+  sourceFilePath: string;
+  destinationPath: string;
+  sourceWidth: number;
+  sourceHeight: number;
+}
+
+export default async ({
+  sourceFilePath,
+  destinationPath,
+  sourceWidth,
+  sourceHeight,
+}: ResizeHorizontalImageParameters) => {
   const fileName = getFileNameFromPath(sourceFilePath);
 
   const fileName1 = `${destinationPath}/${fileName}-1.jpg`;
@@ -23,14 +30,14 @@ export default async (
     .toFile(fileName1);
   logSuccessfulImageCreation(fileName1);
 
-  if (width !== height) {
+  if (sourceWidth !== sourceHeight) {
     const fileName2 = `${destinationPath}/${fileName}-2.jpg`;
     await sharp(sourceFilePath)
       .extract({
         left: 0,
         top: 0,
-        width: Math.floor(width / 2),
-        height,
+        width: Math.floor(sourceWidth / 2),
+        height: sourceHeight,
       })
       .resize(IG_POST_WIDTH, IG_POST_HEIGHT_HOR, {
         ...SHARP_RESIZE_OPTIONS,
@@ -43,10 +50,10 @@ export default async (
     const fileName3 = `${destinationPath}/${fileName}-3.jpg`;
     await sharp(sourceFilePath)
       .extract({
-        left: Math.floor(width / 2),
+        left: Math.floor(sourceWidth / 2),
         top: 0,
-        width: Math.floor(width / 2),
-        height,
+        width: Math.floor(sourceWidth / 2),
+        height: sourceHeight,
       })
       .resize(IG_POST_WIDTH, IG_POST_HEIGHT_HOR, {
         ...SHARP_RESIZE_OPTIONS,
