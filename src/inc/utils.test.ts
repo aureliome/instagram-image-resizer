@@ -1,3 +1,4 @@
+import { ErrnoException } from "../../types/errno-expection";
 import { createDirectory, getFileNameFromPath } from "./utils";
 import { promises as fs } from "fs";
 
@@ -36,8 +37,13 @@ describe("utils", () => {
       try {
         await createDirectory(directoryPath);
       } catch (error) {
-        expect(error.code).not.toBe("ENOENT");
-        expect(fs.mkdir).not.toHaveBeenCalled();
+        if (typeof error === "object" && error !== null && "code" in error) {
+          const errnoError = error as ErrnoException;
+          expect(errnoError.code).not.toBe("ENOENT");
+          expect(fs.mkdir).not.toHaveBeenCalled();
+        } else {
+          throw new Error("unknown error");
+        }
       }
     });
   });

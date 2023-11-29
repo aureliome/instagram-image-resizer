@@ -3,9 +3,10 @@
 ## TO DO
 
 - [x] add commitlint
-- [ ] add linting
-- [x] add husky
+- [x] add husky to run commitlint
 - [x] add .nvmrc
+- [ ] add lint + prettier
+- [ ] run lint on commit
 - [ ] integration tests
 - [ ] write documentation
 - [ ] write CONTRIBUTE documentation

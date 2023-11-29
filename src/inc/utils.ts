@@ -1,4 +1,5 @@
 import { promises as fs } from "fs";
+import { ErrnoException } from "../../types/errno-expection";
 
 export const createDirectory = async (directoryPath: string) => {
   try {
@@ -6,10 +7,12 @@ export const createDirectory = async (directoryPath: string) => {
     if (directoryExists.isDirectory()) {
       return;
     }
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  } catch (error: any) {
-    if (error.code !== "ENOENT") {
-      throw error;
+  } catch (error: unknown) {
+    if (typeof error === "object" && error !== null && "code" in error) {
+      const errnoError = error as ErrnoException;
+      if (errnoError.code !== "ENOENT") {
+        throw errnoError;
+      }
     }
   }
 
