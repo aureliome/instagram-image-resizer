@@ -2,9 +2,9 @@
 
 ## TO DO
 
-- [ ] add commitlint
+- [x] add commitlint
 - [ ] add linting
-- [ ] add husky
+- [x] add husky
 - [ ] integration tests
 - [ ] write documentation
 - [ ] write CONTRIBUTE documentation
