@@ -9,9 +9,8 @@ export const resizeImage = async (
 ) => {
   await createDirectory(destinationPath);
 
-  const { width: sourceWidth, height: sourceHeight } = await sharp(
-    sourceFilePath
-  ).metadata();
+  const { width: sourceWidth, height: sourceHeight } =
+    await sharp(sourceFilePath).metadata();
 
   if (!sourceWidth || !sourceHeight) {
     throw new Error(`

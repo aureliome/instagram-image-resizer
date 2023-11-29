@@ -10,8 +10,8 @@
   "scripts": {
     "clean": "rm -rf .parcel-cache dist output",
     "build": "npm run clean && parcel build",
-    "format": "npm run lint -- --fix",
     "lint": "eslint src/",
+    "lint:fix": "npm run lint -- --fix",
     "start": "node cli.js example output",
     "test": "jest"
   },
