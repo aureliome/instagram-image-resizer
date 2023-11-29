@@ -45,10 +45,10 @@ describe("horizontal", () => {
       jest.clearAllMocks();
     });
 
-    it("it calls getFileNameFromPath", () => {
+    it("it calls getFileNameFromPath", async () => {
       const sourceWidth = 500;
       const sourceHeight = 500;
-      resizeHorizontalImage({
+      await resizeHorizontalImage({
         sourceFilePath,
         destinationPath,
         sourceWidth,

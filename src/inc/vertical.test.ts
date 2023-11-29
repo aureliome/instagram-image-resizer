@@ -38,17 +38,17 @@ describe("vertical", () => {
       jest.clearAllMocks();
     });
 
-    it("it calls getFileNameFromPath", () => {
+    it("it calls getFileNameFromPath", async () => {
       const sourceFilePath = "/source/path/file.jpg";
       const destinationPath = "/destination/path";
-      resizeVerticalImage({ sourceFilePath, destinationPath });
+      await resizeVerticalImage({ sourceFilePath, destinationPath });
       expect(getFileNameFromPath).toHaveBeenCalledWith(sourceFilePath);
     });
 
-    it("it calls sharp methods", () => {
+    it("it calls sharp methods", async () => {
       const sourceFilePath = "/source/path/file.jpg";
       const destinationPath = "/destination/path";
-      resizeVerticalImage({ sourceFilePath, destinationPath });
+      await resizeVerticalImage({ sourceFilePath, destinationPath });
       expect(sharp).toHaveBeenCalledWith(sourceFilePath);
       expect(resizeMock).toHaveBeenCalledWith(
         IG_POST_WIDTH,

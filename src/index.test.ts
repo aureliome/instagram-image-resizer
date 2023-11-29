@@ -39,10 +39,14 @@ describe("main", () => {
     const sourcePath = "path/to/unknown";
     try {
       await main(sourcePath, destinationPath);
-    } catch (error) {
-      expect(error.message).toBe(
-        `Error while processing the path '${sourcePath}'`
-      );
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        expect(error.message).toBe(
+          `Error while processing the path '${sourcePath}'`
+        );
+      } else {
+        throw new Error("unknown error");
+      }
     }
   });
 });

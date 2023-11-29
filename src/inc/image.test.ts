@@ -33,7 +33,7 @@ jest.mock("sharp", () => {
   };
 });
 
-const removeAllSpaces = (string) => string.replace(/\s/g, "");
+const removeAllSpaces = (string: string): string => string.replace(/\s/g, "");
 
 const widthOrHeightError = (sourcePath) => `
   Source Image '${sourcePath}' width and height have not been retrieved
@@ -55,12 +55,16 @@ describe("image", () => {
       const sourcePath = "/source/path/no-width.jpg";
       try {
         await resizeImage(sourcePath, "/destination/path");
-      } catch (error) {
-        expect(removeAllSpaces(error.message)).toBe(
-          removeAllSpaces(widthOrHeightError(sourcePath))
-        );
-        expect(resizeHorizontalImage).not.toHaveBeenCalled();
-        expect(resizeVerticalImage).not.toHaveBeenCalled();
+      } catch (error: unknown) {
+        if (error instanceof Error) {
+          expect(removeAllSpaces(error.message)).toBe(
+            removeAllSpaces(widthOrHeightError(sourcePath))
+          );
+          expect(resizeHorizontalImage).not.toHaveBeenCalled();
+          expect(resizeVerticalImage).not.toHaveBeenCalled();
+        } else {
+          throw new Error("unknown error");
+        }
       }
     });
 
@@ -68,12 +72,16 @@ describe("image", () => {
       const sourcePath = "/source/path/no-height.jpg";
       try {
         await resizeImage(sourcePath, "/destination/path");
-      } catch (error) {
-        expect(removeAllSpaces(error.message)).toBe(
-          removeAllSpaces(widthOrHeightError(sourcePath))
-        );
-        expect(resizeHorizontalImage).not.toHaveBeenCalled();
-        expect(resizeVerticalImage).not.toHaveBeenCalled();
+      } catch (error: unknown) {
+        if (error instanceof Error) {
+          expect(removeAllSpaces(error.message)).toBe(
+            removeAllSpaces(widthOrHeightError(sourcePath))
+          );
+          expect(resizeHorizontalImage).not.toHaveBeenCalled();
+          expect(resizeVerticalImage).not.toHaveBeenCalled();
+        } else {
+          throw new Error("unknown error");
+        }
       }
     });
 
