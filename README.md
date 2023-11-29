@@ -5,6 +5,7 @@
 - [x] add commitlint
 - [ ] add linting
 - [x] add husky
+- [x] add .nvmrc
 - [ ] integration tests
 - [ ] write documentation
 - [ ] write CONTRIBUTE documentation
