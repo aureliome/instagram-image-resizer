@@ -5,8 +5,8 @@
 - [x] add commitlint
 - [x] add husky to run commitlint
 - [x] add .nvmrc
-- [ ] add lint + prettier
-- [ ] run lint on commit
+- [x] add lint + prettier
+- [x] run lint on commit
 - [ ] integration tests
 - [ ] write documentation
 - [ ] write CONTRIBUTE documentation
