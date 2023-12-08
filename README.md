@@ -13,4 +13,3 @@
 - [ ] setup versioning
 - [ ] setup pipeline
 - [ ] publish first version
-- [ ] find a library to compare images in integration tests
