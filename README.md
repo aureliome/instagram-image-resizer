@@ -7,9 +7,10 @@
 - [x] add .nvmrc
 - [x] add lint + prettier
 - [x] run lint on commit
-- [ ] integration tests
+- [x] integration tests
 - [ ] write documentation
 - [ ] write CONTRIBUTE documentation
 - [ ] setup versioning
 - [ ] setup pipeline
 - [ ] publish first version
+- [ ] find a library to compare images in integration tests
