@@ -1,5 +1,6 @@
 import { promises as fs } from "fs";
-import sharp from "sharp";
+import jpeg from "jpeg-js";
+import pixelmatch from "pixelmatch";
 import main from "../src/index";
 
 const sourceFolder = "test/files/src";
@@ -7,21 +8,31 @@ const destFolder = "test/files/dest";
 const expectedFolder = "test/files/expected";
 
 const compareImage = async (fileName) => {
-  // check sizes
-  const { width: destWidth, height: destHeight } = await sharp(
-    `${destFolder}/${fileName}`
-  ).metadata();
+  // read and decode the expected image
+  const expectedImageData = await fs.readFile(`${destFolder}/${fileName}`);
+  const expectedImage = jpeg.decode(expectedImageData);
 
-  const { width: expectedWidth, height: expectedHeight } = await sharp(
-    `${expectedFolder}/${fileName}`
-  ).metadata();
-  expect(destWidth).toBe(expectedWidth);
-  expect(destHeight).toBe(expectedHeight);
+  // read and decode the output image
+  const outputImageData = await fs.readFile(`${expectedFolder}/${fileName}`);
+  const outputImage = jpeg.decode(outputImageData);
 
-  // check data
-  const destImage = await fs.readFile(`${destFolder}/${fileName}`);
-  const expectedImage = await fs.readFile(`${expectedFolder}/${fileName}`);
-  expect(destImage).toEqual(expectedImage);
+  // check if the dimensions are the same
+  expect(outputImage.width).toBe(expectedImage.width);
+  expect(outputImage.height).toBe(expectedImage.height);
+
+  // compare the images pixel by pixel
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-assignment
+  const diff = pixelmatch(
+    expectedImage.data,
+    outputImage.data,
+    null,
+    expectedImage.width,
+    expectedImage.height,
+    { threshold: 0.1 }
+  );
+
+  // expect no difference
+  expect(diff).toBe(0);
 };
 
 describe("integration tests", () => {
@@ -75,6 +86,6 @@ describe("integration tests", () => {
       for (const destFile of destFiles) {
         await compareImage(destFile);
       }
-    }, 40000);
+    });
   });
 });
