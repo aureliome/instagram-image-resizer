@@ -1,0 +1,13 @@
+__mocks__
+.husky
+.parcel-cache
+coverage
+node_modules
+output
+src/**.test.ts
+test
+.eslintrc.js
+.nvmrc
+.prettierrc
+commitlint.config.js
+jest.config.js
