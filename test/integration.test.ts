@@ -1,8 +1,10 @@
+import { promises as fs } from "fs";
 import main from "../src/index";
 
 describe("integration tests", () => {
-  beforeEach(() => {
-    // TODO: clean test/files/dest/
+  afterEach(async () => {
+    await fs.rm("test/files/dest", { recursive: true });
+    console.log("clean");
   });
 
   describe("resize a single image", () => {
@@ -21,7 +23,7 @@ describe("integration tests", () => {
 
   describe("resize multiple images inside a folder", () => {
     it("resize a folder with multiple images", async () => {
-      await main("test/files/src/", "test/files/dest/");
+      await main("test/files/src/", "test/files/dest");
     });
   });
 });
