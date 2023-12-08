@@ -43,18 +43,38 @@ describe("integration tests", () => {
       }
     });
 
-    xit("resize a vertical image", async () => {
+    it("resize a vertical image", async () => {
       await main(`${sourceFolder}/vertical1.jpeg`, destFolder);
+      await compareImage("vertical1-1.jpg");
     });
 
-    xit("resize a square image", async () => {
+    it("resize a square image", async () => {
       await main(`${sourceFolder}/square.jpeg`, destFolder);
+      await compareImage("square-1.jpg");
     });
   });
 
-  xdescribe("resize multiple images inside a folder", () => {
-    xit("resize a folder with multiple images", async () => {
+  describe("resize multiple images inside a folder", () => {
+    it("resize a folder with multiple images", async () => {
       await main(`${sourceFolder}/`, destFolder);
-    });
+
+      const destFiles = [
+        "horizontal1-1.jpg",
+        "horizontal1-2.jpg",
+        "horizontal1-3.jpg",
+        "horizontal2-1.jpg",
+        "horizontal2-2.jpg",
+        "horizontal2-3.jpg",
+        "horizontal3-1.jpg",
+        "horizontal3-2.jpg",
+        "horizontal3-3.jpg",
+        "square-1.jpg",
+        "vertical1-1.jpg",
+        "vertical2-1.jpg",
+      ];
+      for (const destFile of destFiles) {
+        await compareImage(destFile);
+      }
+    }, 40000);
   });
 });
