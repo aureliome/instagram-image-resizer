@@ -1,7 +1,6 @@
 import sharp from "sharp";
 import resizeVerticalImage from "./vertical";
 import { getFileNameFromPath } from "./utils";
-import { logSuccessfulImageCreation } from "./logger";
 import {
   IG_POST_WIDTH,
   IG_POST_HEIGHT_VER,
@@ -11,10 +10,6 @@ import {
 
 jest.mock("./utils", () => ({
   getFileNameFromPath: jest.fn(() => "file"),
-}));
-
-jest.mock("./logger", () => ({
-  logSuccessfulImageCreation: jest.fn(),
 }));
 
 const toFileMock = jest.fn();
@@ -62,10 +57,11 @@ describe("vertical", () => {
     it("it calls logSuccessfulImageCreation", async () => {
       const sourceFilePath = "/source/path/file.jpg";
       const destinationPath = "/destination/path";
-      await resizeVerticalImage({ sourceFilePath, destinationPath });
-      expect(logSuccessfulImageCreation).toHaveBeenCalledWith(
-        `${destinationPath}/file-1.jpg`
-      );
+      const destinationFiles = await resizeVerticalImage({
+        sourceFilePath,
+        destinationPath,
+      });
+      expect(destinationFiles).toContain(`${destinationPath}/file-1.jpg`);
     });
   });
 });

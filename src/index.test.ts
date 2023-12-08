@@ -5,7 +5,7 @@ import main from "./index";
 jest.mock("fs");
 
 jest.mock("./inc/image", () => ({
-  resizeImage: jest.fn(),
+  resizeImage: jest.fn(() => [`/destination/path/file-1.jpg`]),
 }));
 
 describe("main", () => {

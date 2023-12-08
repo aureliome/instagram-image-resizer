@@ -6,7 +6,7 @@ import resizeVerticalImage from "./vertical";
 export const resizeImage = async (
   sourceFilePath: string,
   destinationPath: string
-) => {
+): Promise<string[]> => {
   await createDirectory(destinationPath);
 
   const { width: sourceWidth, height: sourceHeight } =
@@ -19,9 +19,9 @@ export const resizeImage = async (
   }
 
   if (sourceWidth < sourceHeight) {
-    await resizeVerticalImage({ sourceFilePath, destinationPath });
+    return await resizeVerticalImage({ sourceFilePath, destinationPath });
   } else {
-    await resizeHorizontalImage({
+    return await resizeHorizontalImage({
       sourceFilePath,
       destinationPath,
       sourceWidth,

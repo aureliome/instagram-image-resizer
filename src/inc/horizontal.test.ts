@@ -1,7 +1,6 @@
 import sharp from "sharp";
 import resizeHorizontalImage from "./horizontal";
 import { getFileNameFromPath } from "./utils";
-import { logSuccessfulImageCreation } from "./logger";
 import {
   IG_POST_HEIGHT_HOR,
   IG_POST_WIDTH,
@@ -11,10 +10,6 @@ import {
 
 jest.mock("./utils", () => ({
   getFileNameFromPath: jest.fn(() => "file"),
-}));
-
-jest.mock("./logger", () => ({
-  logSuccessfulImageCreation: jest.fn(),
 }));
 
 const toFileMock = jest.fn();
@@ -61,7 +56,7 @@ describe("horizontal", () => {
       it("it generates file-1.jpg", async () => {
         const sourceWidth = 500;
         const sourceHeight = 500;
-        await resizeHorizontalImage({
+        const destinationFiles = await resizeHorizontalImage({
           sourceFilePath,
           destinationPath,
           sourceWidth,
@@ -78,16 +73,8 @@ describe("horizontal", () => {
         expect(toFileMock).toHaveBeenCalledWith(
           `${destinationPath}/file-1.jpg`
         );
-        expect(logSuccessfulImageCreation).toHaveBeenCalledWith(
-          `${destinationPath}/file-1.jpg`
-        );
         expect(extractMock).not.toHaveBeenCalled();
-        expect(logSuccessfulImageCreation).not.toHaveBeenCalledWith(
-          `${destinationPath}/file-2.jpg`
-        );
-        expect(logSuccessfulImageCreation).not.toHaveBeenCalledWith(
-          `${destinationPath}/file-2.jpg`
-        );
+        expect(destinationFiles).toEqual([`${destinationPath}/file-1.jpg`]);
       });
     });
 
@@ -96,7 +83,7 @@ describe("horizontal", () => {
       const sourceHeight = 300;
 
       it("it generates file-1.jpg", async () => {
-        await resizeHorizontalImage({
+        const destinationImages = await resizeHorizontalImage({
           sourceFilePath,
           destinationPath,
           sourceWidth,
@@ -113,13 +100,11 @@ describe("horizontal", () => {
         expect(toFileMock).toHaveBeenCalledWith(
           `${destinationPath}/file-1.jpg`
         );
-        expect(logSuccessfulImageCreation).toHaveBeenCalledWith(
-          `${destinationPath}/file-1.jpg`
-        );
+        expect(destinationImages).toContain(`${destinationPath}/file-1.jpg`);
       });
 
       it("it generates file-2.jpg", async () => {
-        await resizeHorizontalImage({
+        const destinationImages = await resizeHorizontalImage({
           sourceFilePath,
           destinationPath,
           sourceWidth,
@@ -145,13 +130,11 @@ describe("horizontal", () => {
         expect(toFileMock).toHaveBeenCalledWith(
           `${destinationPath}/file-2.jpg`
         );
-        expect(logSuccessfulImageCreation).toHaveBeenCalledWith(
-          `${destinationPath}/file-2.jpg`
-        );
+        expect(destinationImages).toContain(`${destinationPath}/file-2.jpg`);
       });
 
       it("it generates file-3.jpg", async () => {
-        await resizeHorizontalImage({
+        const destinationImages = await resizeHorizontalImage({
           sourceFilePath,
           destinationPath,
           sourceWidth,
@@ -177,9 +160,7 @@ describe("horizontal", () => {
         expect(toFileMock).toHaveBeenCalledWith(
           `${destinationPath}/file-3.jpg`
         );
-        expect(logSuccessfulImageCreation).toHaveBeenCalledWith(
-          `${destinationPath}/file-3.jpg`
-        );
+        expect(destinationImages).toContain(`${destinationPath}/file-2.jpg`);
       });
     });
   });

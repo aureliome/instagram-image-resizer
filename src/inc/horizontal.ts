@@ -6,7 +6,6 @@ import {
   SHARP_JPEG_OPTIONS,
   SHARP_RESIZE_OPTIONS,
 } from "./constants";
-import { logSuccessfulImageCreation } from "./logger";
 
 interface ResizeHorizontalImageParameters {
   sourceFilePath: string;
@@ -20,7 +19,8 @@ export default async ({
   destinationPath,
   sourceWidth,
   sourceHeight,
-}: ResizeHorizontalImageParameters) => {
+}: ResizeHorizontalImageParameters): Promise<string[]> => {
+  const destinationFiles: string[] = [];
   const fileName = getFileNameFromPath(sourceFilePath);
 
   const fileName1 = `${destinationPath}/${fileName}-1.jpg`;
@@ -28,7 +28,7 @@ export default async ({
     .resize(IG_POST_WIDTH, IG_POST_HEIGHT_HOR, SHARP_RESIZE_OPTIONS)
     .jpeg(SHARP_JPEG_OPTIONS)
     .toFile(fileName1);
-  logSuccessfulImageCreation(fileName1);
+  destinationFiles.push(fileName1);
 
   if (sourceWidth !== sourceHeight) {
     const fileName2 = `${destinationPath}/${fileName}-2.jpg`;
@@ -45,7 +45,7 @@ export default async ({
       })
       .jpeg(SHARP_JPEG_OPTIONS)
       .toFile(fileName2);
-    logSuccessfulImageCreation(fileName2);
+    destinationFiles.push(fileName2);
 
     const fileName3 = `${destinationPath}/${fileName}-3.jpg`;
     await sharp(sourceFilePath)
@@ -61,6 +61,8 @@ export default async ({
       })
       .jpeg(SHARP_JPEG_OPTIONS)
       .toFile(fileName3);
-    logSuccessfulImageCreation(fileName3);
+    destinationFiles.push(fileName3);
   }
+
+  return destinationFiles;
 };
