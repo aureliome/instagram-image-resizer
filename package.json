@@ -12,7 +12,7 @@
     "build": "npm run clean && parcel build",
     "lint": "eslint src/",
     "lint:fix": "npm run lint -- --fix",
-    "start": "node cli.js example output",
+    "start": "node cli.js test/files/src output",
     "test:unit": "jest src/",
     "test:integration": "jest test/integration.test.ts",
     "test": "npm run test:unit && npm run test:integration"
