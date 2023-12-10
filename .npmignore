@@ -4,7 +4,7 @@ __mocks__
 coverage
 node_modules
 output
-src/**.test.ts
+src/**/*.test.ts
 test
 .eslintrc.js
 .nvmrc
