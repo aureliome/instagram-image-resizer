@@ -120,4 +120,5 @@ Thanks to:
 
 ## Next Steps
 
-- Resize images for Instagram Stories.
+- Add logs for the CLI usage;
+- resize images for Instagram Stories.
