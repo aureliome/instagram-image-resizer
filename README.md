@@ -66,6 +66,10 @@ npx instagram-image-resizer src/image.jpg output
 
 or in your code:
 
+```bash
+npm install instagram-image-resizer
+```
+
 ```javascript
 import resizer from "instagram-image-resizer";
 
@@ -87,6 +91,10 @@ npx instagram-image-resizer src output
 ```
 
 or in your code:
+
+```bash
+npm install instagram-image-resizer
+```
 
 ```javascript
 import resizer from "instagram-image-resizer";
