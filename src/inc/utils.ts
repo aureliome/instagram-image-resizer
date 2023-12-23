@@ -24,3 +24,8 @@ export const getFileNameFromPath = (filePath: string) => {
   const fileNameWithExtension = filePathParts[filePathParts.length - 1]!;
   return fileNameWithExtension.split(".").slice(0, -1).join(".");
 };
+
+export const isImageFile = (filename: string) => {
+  const extensionRegex = /\.(jpg|jpeg|png|gif)$/i;
+  return extensionRegex.test(filename);
+};

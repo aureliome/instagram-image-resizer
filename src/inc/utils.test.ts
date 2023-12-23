@@ -1,5 +1,5 @@
 import { ErrnoException } from "../../types/errno-expection";
-import { createDirectory, getFileNameFromPath } from "./utils";
+import { createDirectory, getFileNameFromPath, isImageFile } from "./utils";
 import { promises as fs } from "fs";
 
 jest.mock("fs");
@@ -56,6 +56,18 @@ describe("utils", () => {
       expect(getFileNameFromPath("/file.foo.jpg")).toBe("file.foo");
       expect(getFileNameFromPath("file.jpg")).toBe("file");
       expect(getFileNameFromPath("file.foo.jpg")).toBe("file.foo");
+    });
+  });
+
+  describe("isImageFile", () => {
+    it("it checks if the filename is compatible with an image", () => {
+      expect(isImageFile("example.jpg")).toBe(true);
+      expect(isImageFile("example.jpeg")).toBe(true);
+      expect(isImageFile("example.gif")).toBe(true);
+      expect(isImageFile("example.png")).toBe(true);
+      expect(isImageFile("example.txt")).toBe(false);
+      expect(isImageFile("example")).toBe(false);
+      expect(isImageFile(".DS_Store")).toBe(false);
     });
   });
 });
