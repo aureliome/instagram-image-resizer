@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.0.1
+
+Fix: when you pass a directory, it filters files using only images.
+
 ## 1.0.0
 
 First version of the library:

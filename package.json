@@ -1,6 +1,6 @@
 {
   "name": "instagram-image-resizer",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Resize and optimise images for Instagram post sizes.",
   "source": "src/index.ts",
   "main": "dist/main.js",
